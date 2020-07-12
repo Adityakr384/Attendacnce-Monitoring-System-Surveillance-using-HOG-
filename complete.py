@@ -93,7 +93,8 @@ def one():
             else:
                     print("Face Not Found")
                     print(id)
-                    quit()
+                    
+            print(id)  
         return encodeList
     encodeListKnown = findEncodings(images,stId)
 
@@ -124,7 +125,10 @@ def two():
             #print(matches)
             faceDis = face_recognition.face_distance(encodeListKnown,encodeFace)
             #print(faceDis)
-            matchIndex = np.argmin(faceDis)
+            try:
+                matchIndex = np.argmin(faceDis)
+            except ValueError:
+                pass
             #print(matchIndex)
             
             if faceDis[matchIndex]< 0.50:
@@ -145,8 +149,8 @@ def two():
 
 
 addNewMem=Button(window,text="Add New Member",command=create).pack()
-train=Button(window,text="Train",command=one).pack()
-test=Button(window,text="Test",command=two).pack()
+extract=Button(window,text="Extract Encodings",command=one).pack()
+test=Button(window,text="Real Time Monitor",command=two).pack()
 
 
 window.minsize(1280,800)
